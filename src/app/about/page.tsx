@@ -1,68 +1,58 @@
-import { getDB } from "@/lib/db";
-import { SectionHeader } from "@/components/SectionHeader";
+import type { Metadata } from "next";
 
-export default async function AboutPage() {
-  const db = await getDB();
-  const s = db.settings;
-  const totals = {
-    releases: db.tracks.filter((t) => t.status === "release").length,
-    demos: db.tracks.filter((t) => t.status === "demo").length,
-    archive: db.tracks.filter((t) => t.status === "archive").length,
-    coming: db.tracks.filter((t) => t.status === "coming").length,
-  };
+export const metadata: Metadata = {
+  title: "О нас — Колючка и Ко",
+};
 
+export default function AboutPage() {
   return (
-    <div className="space-y-10 max-w-2xl">
-      <SectionHeader title="About" subtitle={`${s.artistName} — ${s.location || ""}`} />
+    <div className="space-y-12 animate-fade-in max-w-3xl">
+      <header>
+        <span className="tag">с 2014 года</span>
+        <h1 className="font-display text-4xl text-cactus-900 mt-3">О нас</h1>
+      </header>
 
-      <div className="prose prose-invert max-w-none">
-        <p className="text-lg text-ink-200 leading-relaxed whitespace-pre-wrap">
-          {s.about}
+      <section className="space-y-4 text-cactus-800/90 leading-relaxed">
+        <p>
+          Всё началось с одного эхинокактуса, забытого на подоконнике общаги. Когда
+          через четыре года он выпустил жёлтый цветок размером с монету, стало ясно:
+          с этими ребятами стоит подружиться надолго.
         </p>
-      </div>
+        <p>
+          Сегодня «Колючка и Ко» — небольшая команда из шести человек: два агронома,
+          водитель, упаковщик, фотограф и кот Пыль. Мы привозим растения из питомников
+          в Краснодарском крае, Голландии и Чехии, проверяем каждое перед отправкой
+          и заменяем без вопросов, если что-то пошло не так в пути.
+        </p>
+        <p>
+          Мы не самый большой и не самый дешёвый магазин. Но если вы хотите, чтобы
+          кактус прожил у вас лет двадцать и однажды зацвёл — нам по пути.
+        </p>
+      </section>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <Stat label="релизов" value={totals.releases} />
-        <Stat label="демок" value={totals.demos} />
-        <Stat label="в архиве" value={totals.archive} />
-        <Stat label="скоро" value={totals.coming} />
-      </div>
-
-      {s.links.length > 0 && (
-        <div>
-          <div className="text-[10px] uppercase tracking-[0.22em] text-ink-500 mb-3">
-            Где ещё
+      <section className="grid sm:grid-cols-3 gap-4">
+        {[
+          { num: "9 лет", body: "выращиваем и доставляем" },
+          { num: "16 000+", body: "кактусов уехали к новым хозяевам" },
+          { num: "98%", body: "доезжают целыми (за остальные платим мы)" },
+        ].map((s) => (
+          <div key={s.num} className="card p-5">
+            <div className="font-display text-3xl text-cactus-700">{s.num}</div>
+            <div className="text-sm text-cactus-700/80 mt-1">{s.body}</div>
           </div>
-          <ul className="space-y-2">
-            {s.links.map((l) => (
-              <li key={l.url}>
-                <a
-                  href={l.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-ink-200 hover:text-ink-100 underline-offset-4 hover:underline"
-                >
-                  {l.label}{" "}
-                  <span className="text-ink-500 text-xs">→ {l.url.replace(/^https?:\/\//, "")}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        ))}
+      </section>
 
-      <p className="text-xs text-ink-500 pt-8 border-t border-ink-800">
-        этот сайт — мой архив. здесь нет рекламы, нет рекомендаций.
-      </p>
-    </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-xl border border-ink-800 bg-ink-900 p-4">
-      <div className="font-display text-3xl text-ink-100">{value}</div>
-      <div className="text-xs text-ink-500 mt-1">{label}</div>
+      <section className="card p-6 bg-cactus-50/60 border-cactus-200">
+        <h2 className="font-display text-2xl text-cactus-900">Где мы</h2>
+        <p className="text-sm text-cactus-800/90 mt-2">
+          Москва, Покровка, 22 — самовывоз и оранжерея с экземплярами, которых ещё
+          нет в каталоге. Загляните, если будете рядом.
+        </p>
+        <p className="text-sm text-cactus-700/80 mt-2">
+          пн–вс, 11:00–20:00 · +7 (495) 123-45-67
+        </p>
+      </section>
     </div>
   );
 }

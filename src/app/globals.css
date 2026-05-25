@@ -3,122 +3,109 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
 body {
-  background: #0a0a0b;
-  color: #ebecef;
+  background: #fbf8f1;
+  color: #1d3a20;
   min-height: 100%;
 }
 
 body {
-  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: #2f3138;
-  color: #fff;
+  background: #d4ebd3;
+  color: #142a17;
 }
 
-/* Custom thin scrollbar */
+.cactus-pattern {
+  background-color: #fbf8f1;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(82, 162, 86, 0.08) 0, transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(207, 144, 105, 0.10) 0, transparent 40%);
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(20, 42, 23, 0.08);
+  border-radius: 14px;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(82, 162, 86, 0.35);
+  box-shadow: 0 14px 30px -18px rgba(20, 42, 23, 0.25);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: #2f6e33;
+  color: #fbf8f1;
+}
+.btn-primary:hover {
+  background: #264f29;
+}
+.btn-ghost {
+  background: transparent;
+  color: #1d3a20;
+  border: 1px solid rgba(20, 42, 23, 0.18);
+}
+.btn-ghost:hover {
+  background: rgba(20, 42, 23, 0.04);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #eef7ee;
+  color: #2f6e33;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+
+.input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(20, 42, 23, 0.18);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  color: #1d3a20;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.input:focus {
+  border-color: #52a256;
+  box-shadow: 0 0 0 3px rgba(82, 162, 86, 0.18);
+}
+
 .scroll-thin::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 .scroll-thin::-webkit-scrollbar-thumb {
-  background: #2f3138;
+  background: #d4ebd3;
   border-radius: 999px;
-}
-.scroll-thin::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Cover gradient placeholder */
-.cover-placeholder {
-  background:
-    radial-gradient(120% 80% at 30% 20%, rgba(232, 230, 223, 0.18), transparent 60%),
-    radial-gradient(120% 80% at 80% 80%, rgba(210, 196, 162, 0.12), transparent 60%),
-    linear-gradient(135deg, #1a1b1f 0%, #0f1011 100%);
-}
-
-/* Vinyl spin */
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.spin-slow {
-  animation: spin-slow 14s linear infinite;
-}
-
-/* Equalizer */
-.eq {
-  display: inline-flex;
-  align-items: end;
-  gap: 2px;
-  height: 12px;
-}
-.eq span {
-  width: 2px;
-  background: currentColor;
-  animation: eq 0.9s ease-in-out infinite;
-  height: 100%;
-  border-radius: 1px;
-}
-.eq span:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.eq span:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.eq span:nth-child(4) {
-  animation-delay: 0.45s;
-}
-@keyframes eq {
-  0%,
-  100% {
-    transform: scaleY(0.3);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-/* Range input */
-input[type="range"].slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  background: #2f3138;
-  border-radius: 999px;
-  outline: none;
-  cursor: pointer;
-}
-input[type="range"].slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: #ebecef;
-  cursor: pointer;
-  box-shadow: 0 0 0 4px rgba(235, 236, 239, 0.06);
-  transition: transform 120ms ease;
-}
-input[type="range"].slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-input[type="range"].slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  border: none;
-  border-radius: 999px;
-  background: #ebecef;
-  cursor: pointer;
 }
