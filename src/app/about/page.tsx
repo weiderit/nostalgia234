@@ -7,9 +7,14 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="space-y-12 animate-fade-in max-w-3xl">
-      <header>
-        <span className="tag">с 2014 года</span>
-        <h1 className="font-display text-4xl text-cactus-900 mt-3">О нас</h1>
+      <header className="relative">
+        <div className="hero-blob bg-cactus-100 w-[280px] h-[280px] -top-16 -left-10" />
+        <div className="relative">
+          <span className="tag">с 2014 года</span>
+          <h1 className="font-display text-5xl md:text-6xl text-cactus-900 mt-3 tracking-tight leading-[1.05]">
+            О нас и о <em className="not-italic text-cactus-500" style={{ fontStyle: "italic" }}>колючках</em>
+          </h1>
+        </div>
       </header>
 
       <section className="space-y-4 text-cactus-800/90 leading-relaxed">

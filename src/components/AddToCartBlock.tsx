@@ -18,34 +18,37 @@ export function AddToCartBlock({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-3">
-        <div className="flex items-center rounded-full border border-cactus-200 bg-white">
+      <div className="flex items-stretch gap-3">
+        <div className="flex items-center rounded-full bg-white border border-cactus-100 shadow-soft">
           <button
             onClick={() => setQty((q) => Math.max(1, q - 1))}
-            className="w-10 h-10 grid place-items-center text-cactus-700 hover:text-cactus-900"
+            className="w-11 h-11 grid place-items-center text-cactus-700 hover:text-cactus-900 transition-colors"
             aria-label="Уменьшить"
           >
-            −
+            <span className="text-lg">−</span>
           </button>
-          <span className="w-8 text-center font-medium">{qty}</span>
+          <span className="w-9 text-center font-medium text-cactus-900">{qty}</span>
           <button
             onClick={() => setQty((q) => Math.min(product.stock || 99, q + 1))}
-            className="w-10 h-10 grid place-items-center text-cactus-700 hover:text-cactus-900"
+            className="w-11 h-11 grid place-items-center text-cactus-700 hover:text-cactus-900 transition-colors"
             aria-label="Увеличить"
           >
-            +
+            <span className="text-lg">+</span>
           </button>
         </div>
         <button
           onClick={onAdd}
-          className="btn btn-primary flex-1"
+          className="btn btn-primary flex-1 py-3"
           disabled={product.stock === 0}
         >
           {product.stock === 0 ? "Нет в наличии" : added ? "Добавлено ✓" : "В корзину"}
         </button>
       </div>
       {added && (
-        <Link href="/cart" className="text-sm text-cactus-600 hover:text-cactus-800 underline-offset-4 hover:underline">
+        <Link
+          href="/cart"
+          className="text-sm text-cactus-600 hover:text-cactus-800 underline-offset-4 hover:underline animate-fade-in"
+        >
           перейти в корзину →
         </Link>
       )}

@@ -19,61 +19,103 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     .slice(0, 3);
 
   return (
-    <div className="space-y-12 animate-fade-in">
-      <nav className="text-sm text-cactus-700/70">
-        <Link href="/" className="hover:text-cactus-800">
+    <div className="space-y-16 animate-fade-in">
+      <nav className="text-sm text-cactus-700/70 flex items-center gap-2">
+        <Link href="/" className="hover:text-cactus-900 transition-colors">
           главная
-        </Link>{" "}
-        /{" "}
-        <Link href="/catalog" className="hover:text-cactus-800">
+        </Link>
+        <span className="text-cactus-300">/</span>
+        <Link href="/catalog" className="hover:text-cactus-900 transition-colors">
           каталог
-        </Link>{" "}
-        / <span className="text-cactus-900">{product.name}</span>
+        </Link>
+        <span className="text-cactus-300">/</span>
+        <span className="text-cactus-900">{product.name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-10">
-        <div className="card overflow-hidden">
+      <div className="grid lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-14">
+        <div className="card overflow-hidden relative">
           <div className="aspect-square cactus-pattern relative">
-            <CactusArt accent={product.accent} variant={product.category} className="absolute inset-0" />
+            <div className="absolute inset-8 rounded-[40%_60%_55%_45%/55%_45%_60%_40%] bg-gradient-to-br from-cactus-100/60 via-bone-100/40 to-clay-100/30 animate-float" />
+            <div className="absolute inset-0 grid place-items-center">
+              <div className="w-[82%] h-[82%]">
+                <CactusArt accent={product.accent} variant={product.category} />
+              </div>
+            </div>
+            <span className="absolute top-5 left-5 tag">{product.category}</span>
           </div>
         </div>
-        <div className="space-y-5">
+        <div className="space-y-6">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="tag">{product.category}</span>
             {product.stock > 0 ? (
-              <span className="tag bg-cactus-100">в наличии: {product.stock}</span>
+              <span className="tag bg-cactus-100/70">в наличии · {product.stock}</span>
             ) : (
-              <span className="tag bg-clay-100 text-clay-500">нет в наличии</span>
+              <span className="tag bg-clay-100/80 text-clay-500 border-clay-200">
+                нет в наличии
+              </span>
             )}
+            <span className="tag bg-bone-100 text-cactus-700 border-cactus-100">
+              {product.origin}
+            </span>
           </div>
-          <h1 className="font-display text-4xl text-cactus-900 leading-tight">{product.name}</h1>
-          <div className="text-cactus-700/70 italic">{product.latin}</div>
-          <div className="text-3xl font-display text-cactus-800">{formatPrice(product.price)}</div>
-          <p className="text-cactus-800/90 leading-relaxed">{product.description}</p>
+          <div>
+            <h1 className="font-display text-[clamp(2rem,4vw,3.5rem)] text-cactus-900 leading-[1.05] tracking-tight">
+              {product.name}
+            </h1>
+            <div className="text-cactus-700/65 italic mt-2 font-display text-lg">
+              {product.latin}
+            </div>
+          </div>
+          <div className="flex items-baseline gap-3">
+            <div className="font-display text-4xl text-cactus-800 font-medium">
+              {formatPrice(product.price)}
+            </div>
+            <div className="text-sm text-cactus-700/60">за растение</div>
+          </div>
+          <p className="text-cactus-800/85 leading-relaxed text-[1.02rem]">
+            {product.description}
+          </p>
 
-          <dl className="grid grid-cols-2 gap-3 text-sm pt-2">
-            <Spec label="Размер" value={product.size} />
-            <Spec label="Происхождение" value={product.origin} />
-            <Spec label="Свет" value={product.light} />
-            <Spec label="Полив" value={product.watering} />
+          <dl className="grid grid-cols-2 gap-3 pt-2">
+            <Spec label="Размер" value={product.size} icon="📏" />
+            <Spec label="Свет" value={product.light} icon="☀️" />
+            <Spec label="Полив" value={product.watering} icon="💧" />
+            <Spec label="Откуда" value={product.origin} icon="🗺" />
           </dl>
 
-          <div className="pt-4 border-t border-cactus-100">
+          <div className="pt-2">
             <AddToCartBlock product={product} />
           </div>
 
-          <div className="card p-5 bg-cactus-50/60 border-cactus-200 space-y-2">
-            <div className="flex items-center gap-2 font-medium text-cactus-800">
-              <span>🌱</span> Как ухаживать
+          <div className="card p-6 bg-gradient-to-br from-cactus-50/80 to-bone-100 border-cactus-100 space-y-2 relative overflow-hidden">
+            <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-cactus-100/60 blur-2xl" />
+            <div className="relative">
+              <div className="flex items-center gap-2 font-medium text-cactus-900">
+                <span className="text-xl">🌱</span> Как ухаживать
+              </div>
+              <p className="text-[0.97rem] text-cactus-800/90 leading-relaxed mt-2">
+                {product.care}
+              </p>
             </div>
-            <p className="text-sm text-cactus-800/90 leading-relaxed">{product.care}</p>
           </div>
         </div>
       </div>
 
       {related.length > 0 && (
-        <section className="space-y-4">
-          <h2 className="font-display text-2xl text-cactus-900">С этим часто берут</h2>
+        <section className="space-y-5">
+          <div className="flex items-end justify-between">
+            <div>
+              <span className="tag">похожее</span>
+              <h2 className="font-display text-3xl md:text-4xl text-cactus-900 mt-3 tracking-tight">
+                С этим часто берут
+              </h2>
+            </div>
+            <Link
+              href="/catalog"
+              className="text-sm text-cactus-600 hover:text-cactus-800 underline-offset-4 hover:underline"
+            >
+              весь каталог →
+            </Link>
+          </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />
@@ -85,11 +127,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   );
 }
 
-function Spec({ label, value }: { label: string; value: string }) {
+function Spec({ label, value, icon }: { label: string; value: string; icon: string }) {
   return (
-    <div className="bg-white border border-cactus-100 rounded-lg p-3">
-      <dt className="text-xs uppercase tracking-wider text-cactus-700/60">{label}</dt>
-      <dd className="text-cactus-900 mt-0.5">{value}</dd>
+    <div className="card-flat p-4">
+      <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-cactus-700/60">
+        <span aria-hidden>{icon}</span>
+        <span>{label}</span>
+      </div>
+      <div className="text-cactus-900 mt-1.5 font-medium">{value}</div>
     </div>
   );
 }
