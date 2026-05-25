@@ -60,30 +60,36 @@ const myths = [
 
 export default function CarePage() {
   return (
-    <div className="space-y-12 animate-fade-in">
-      <header className="max-w-2xl">
-        <span className="tag">инструкция</span>
-        <h1 className="font-display text-4xl text-cactus-900 mt-3">
-          Как не загубить кактус
-        </h1>
-        <p className="text-cactus-700/90 mt-3">
-          Шесть правил, на которых держится 90% успеха. Распечатайте, повесьте у окна
-          или просто запомните — и ваш колючий друг переживёт вас.
-        </p>
+    <div className="space-y-14 animate-fade-in">
+      <header className="max-w-2xl relative">
+        <div className="hero-blob bg-cactus-100 w-[280px] h-[280px] -top-16 -left-10" />
+        <div className="relative">
+          <span className="tag">инструкция</span>
+          <h1 className="font-display text-5xl md:text-6xl text-cactus-900 mt-3 tracking-tight leading-[1.05]">
+            Как <em className="not-italic text-cactus-500" style={{ fontStyle: "italic" }}>не загубить</em> кактус
+          </h1>
+          <p className="text-cactus-700/85 mt-4 text-lg leading-relaxed">
+            Шесть правил, на которых держится 90% успеха. Распечатайте, повесьте у окна
+            или просто запомните — и ваш колючий друг переживёт вас.
+          </p>
+        </div>
       </header>
 
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {tips.map((t) => (
-          <div key={t.title} className="card p-5">
-            <div className="text-3xl">{t.icon}</div>
-            <div className="font-display text-xl text-cactus-900 mt-2">{t.title}</div>
-            <p className="text-sm text-cactus-700/90 mt-2 leading-relaxed">{t.body}</p>
+          <div key={t.title} className="card p-6 group">
+            <div className="w-14 h-14 rounded-2xl bg-cactus-50 border border-cactus-100 grid place-items-center text-2xl group-hover:scale-105 transition-transform">
+              {t.icon}
+            </div>
+            <div className="font-display text-2xl text-cactus-900 mt-4 tracking-tight">{t.title}</div>
+            <p className="text-[0.95rem] text-cactus-700/85 mt-2 leading-relaxed">{t.body}</p>
           </div>
         ))}
       </section>
 
-      <section className="card p-8 bg-cactus-50/60 border-cactus-200">
-        <h2 className="font-display text-2xl text-cactus-900 mb-4">Календарь по сезонам</h2>
+      <section className="card p-8 md:p-10 bg-gradient-to-br from-cactus-50/80 to-bone-100 border-cactus-100 relative overflow-hidden">
+        <div className="absolute -top-20 -right-10 w-72 h-72 rounded-full bg-cactus-100/50 blur-3xl" />
+        <h2 className="font-display text-3xl text-cactus-900 mb-5 tracking-tight relative">Календарь по сезонам</h2>
         <div className="grid sm:grid-cols-4 gap-4 text-sm">
           {[
             { s: "🌸 Весна", body: "Просыпаемся. Постепенно увеличиваем полив, начинаем подкармливать, можно пересаживать." },
@@ -100,7 +106,7 @@ export default function CarePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-2xl text-cactus-900">Мифы о кактусах</h2>
+        <h2 className="font-display text-3xl text-cactus-900 tracking-tight">Мифы о кактусах</h2>
         <div className="space-y-3">
           {myths.map((m) => (
             <details key={m.q} className="card p-5 group">
