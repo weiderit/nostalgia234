@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #0a0a0b;
+  color: #ebecef;
+  min-height: 100%;
+}
+
+body {
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #2f3138;
+  color: #fff;
+}
+
+/* Custom thin scrollbar */
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #2f3138;
+  border-radius: 999px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Cover gradient placeholder */
+.cover-placeholder {
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(232, 230, 223, 0.18), transparent 60%),
+    radial-gradient(120% 80% at 80% 80%, rgba(210, 196, 162, 0.12), transparent 60%),
+    linear-gradient(135deg, #1a1b1f 0%, #0f1011 100%);
+}
+
+/* Vinyl spin */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+/* Equalizer */
+.eq {
+  display: inline-flex;
+  align-items: end;
+  gap: 2px;
+  height: 12px;
+}
+.eq span {
+  width: 2px;
+  background: currentColor;
+  animation: eq 0.9s ease-in-out infinite;
+  height: 100%;
+  border-radius: 1px;
+}
+.eq span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.eq span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.eq span:nth-child(4) {
+  animation-delay: 0.45s;
+}
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Range input */
+input[type="range"].slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #2f3138;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #ebecef;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(235, 236, 239, 0.06);
+  transition: transform 120ms ease;
+}
+input[type="range"].slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+input[type="range"].slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 999px;
+  background: #ebecef;
+  cursor: pointer;
+}
