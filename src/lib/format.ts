@@ -1,36 +1,16 @@
-export function formatDate(iso?: string, locale = "ru-RU"): string {
-  if (!iso) return "";
-  try {
-    const d = new Date(iso);
-    return d.toLocaleDateString(locale, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return iso;
-  }
+export function formatPrice(value: number): string {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "RUB",
+    maximumFractionDigits: 0,
+  }).format(value);
 }
 
-export function relativeDate(iso?: string): string {
-  if (!iso) return "";
-  const d = new Date(iso);
-  const diff = (Date.now() - d.getTime()) / 1000;
-  if (diff < 60) return "только что";
-  if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
-  if (diff < 86400 * 7) return `${Math.floor(diff / 86400)} д назад`;
-  return formatDate(iso);
-}
-
-export function latestRelease<T extends { releaseDate?: string; createdAt: string }>(
-  items: T[],
-): T | undefined {
-  const released = items.filter((i) => i.releaseDate);
-  if (released.length === 0) return items[0];
-  return [...released].sort((a, b) => {
-    return (
-      new Date(b.releaseDate!).getTime() - new Date(a.releaseDate!).getTime()
-    );
-  })[0];
+export function plural(n: number, forms: [string, string, string]): string {
+  const abs = Math.abs(n) % 100;
+  const n1 = abs % 10;
+  if (abs > 10 && abs < 20) return forms[2];
+  if (n1 > 1 && n1 < 5) return forms[1];
+  if (n1 === 1) return forms[0];
+  return forms[2];
 }
